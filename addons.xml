@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addons>
+<addon id="repository.feenichs" name="Feenichs Add-ons" version="1.0.0" provider-name="Feenichs">
+    <extension point="xbmc.addon.repository" name="Feenichs Add-ons">
+        <dir>
+            <info compressed="false">https://feenichs.github.io/kodi-repository/addons.xml</info>
+            <checksum>https://feenichs.github.io/kodi-repository/addons.xml.md5</checksum>
+            <datadir zip="true">https://feenichs.github.io/kodi-repository/</datadir>
+            <hashes>sha256</hashes>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="de_DE">Add-ons von Feenichs</summary>
+        <summary lang="en_GB">Add-ons by Feenichs</summary>
+        <description lang="de_DE">Updates für Spotify TV, YouTube für TV, MediathekView TV und Amazon VOD TV: Forks mit einer Oberfläche für die Fernbedienung. Dazu die Module, die Amazon VOD TV braucht und die nicht im offiziellen Kodi-Repository sind.</description>
+        <description lang="en_GB">Updates for Spotify TV, YouTube für TV, MediathekView TV and Amazon VOD TV: forks with an interface for remote controls. Also the modules Amazon VOD TV needs that are not in the official Kodi repository.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <source>https://github.com/Feenichs/kodi-repository</source>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>
+<addon id="plugin.audio.spotify.tv" version="2.0.1" name="Spotify TV" provider-name="Feenichs, glk1001">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="xbmc.addon" version="18.9.701" />
+        <import addon="script.module.certifi" version="2023.5.7" />
+        <import addon="script.module.chardet" version="5.1.0" />
+        <import addon="script.module.idna" version="3.4.0" />
+        <import addon="script.module.requests" version="2.31.0" />
+        <import addon="script.module.urllib3" version="1.26.16" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="plugin.py">
+        <provides>audio</provides>
+    </extension>
+    <extension library="service.py" point="xbmc.service" />
+    <extension point="xbmc.python.script" library="script.py" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary lang="en_GB">Unofficial Spotify music plugin for Kodi, made for TVs</summary>
+        <description lang="en_GB">Allows you to use your Spotify premium account to connect and play Spotify through Kodi. A fork of glk1001's plugin.audio.spotify with a TV interface for remote controls and faster listings. It has its own add-on id, so it can be installed next to the original.</description>
+        <disclaimer lang="en_GB">This product uses the SPOTIFY WEB API but is not endorsed, certified or otherwise approved in any way by Spotify. Spotify is the registered trademark of Spotify AB.</disclaimer>
+        <source>https://github.com/Feenichs/plugin.audio.spotify</source>
+        <website>https://github.com/glk1001/glk1001.github.io</website>
+        <news>2.0.1: Saved albums open without waiting, they are cached in the background. Albums, artist pages and new releases load with far fewer requests, an artist's albums also with the own client id. 2.0.0: Own add-on id plugin.audio.spotify.tv and name "Spotify TV", so it no longer replaces the original Spotify add-on and both can be installed. Settings and sign-in are not taken over from plugin.audio.spotify. 1.3.15~tv26: Sharp Spotify logo in the header of the TV interface. 1.3.15~tv25: While Spotify throttles requests, lists show their last copy at once instead of waiting for minutes; preloading in the background pauses instead of waiting. 1.3.15~tv24: A like, save or follow in Kodi only reloads the library lists, no longer the whole cache. Likes made elsewhere no longer make all cached lists invalid. Context menus show the current saved and followed state. 1.3.15~tv23: Saved tracks and albums load with fewer requests, albums are cached (ideas by damnms). 1.3.15~tv22: Cached listings are no longer mistaken for up to date when their checksums collide (fix by damnms). 1.3.15~tv21: The focused row no longer moves or loses the cursor while other rows are still loading. 1.3.15~tv20: Merged upstream: plugin actions are allowlisted, auth tokens are no longer logged, an expired token signs in again. The own client id setting is now upstream's "user_client_id". Long track lists and grids have a slider on the right to page through them quickly. All playlists are listed while Spotify throttles requests. Tracks started while a video is playing are played as music, also from the classic menu and remote apps. Videos playing in the background stay in sync and are shown as a mini preview. New TV interface with synced lyrics, much faster listings, playlists preloaded, optional own client id with tabs and rows of tiles, made for remote controls.
+v1.3.14 (2025-02-10)
+Upgraded python 'bottle' module to version '0.14-dev'. Now works with python 3.13.
+1.3.13: Changed default album retrieval for 'artists' to just albums and singles instead of everything. And added more logging to figure how many cached/non-cached things the plugin is retrieving.
+1.3.12: Added a workaround setting "problem_with_terminate_streaming" to not terminate streaming early. Added for Raspberry Pi devices.
+        </news>
+        <assets>
+            <icon>resources/icon.png</icon>
+            <fanart>resources/fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="plugin.video.youtube.tv" name="YouTube für TV" version="7.4.4.16" provider-name="Feenichs, anxdpanic, bromix, MoojMidge">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.requests" version="2.27.1"/>
+        <import addon="inputstream.adaptive" version="19.0.0"/>
+        <import addon="script.module.inputstreamhelper" version="0.2.2" optional="true"/>
+        <import addon="script.module.pysocks" optional="true"/>
+        <import addon="script.module.pyqrcode" version="1.2.1"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="resources/lib/plugin.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.service" library="resources/lib/service.py"/>
+    <extension point="xbmc.python.module" library="resources/lib/"/>
+    <extension point="xbmc.python.script" library="resources/lib/script.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <assets>
+            <icon>resources/media/icon.png</icon>
+            <fanart>resources/media/fanart.jpg</fanart>
+        </assets>
+        <platform>all</platform>
+        <license>GPL-2.0-only</license>
+        <forum>https://ytaddon.panicked.xyz/forum</forum>
+        <website>https://www.youtube.com</website>
+        <source>https://github.com/Feenichs/plugin.video.youtube</source>
+        <reuselanguageinvoker>true</reuselanguageinvoker>
+        <summary lang="bg_BG">Добавка за YouTube</summary>
+        <summary lang="bs_BA">Dodatak za YouTube</summary>
+        <summary lang="cs_CZ">Doplněk pro YouTube</summary>
+        <summary lang="da_DK">Plugin til YouTube</summary>
+        <summary lang="de_DE">Plugin für YouTube</summary>
+        <summary lang="el_GR">Πρόσθετο για το YouTube</summary>
+        <summary lang="en_GB">Plugin for YouTube</summary>
+        <summary lang="eo">Aldonaĵo por YouTube</summary>
+        <summary lang="es_ES">Complemento para YouTube</summary>
+        <summary lang="es_MX">Complemento para YouTube</summary>
+        <summary lang="et_EE">YouTube lisamoodul</summary>
+        <summary lang="fi_FI">YouTube-lisäosa</summary>
+        <summary lang="fr_FR">Plugin pour YouTube</summary>
+        <summary lang="ga">Breiseán do YouTube</summary>
+        <summary lang="he_IL">תוסף עבור YouTube</summary>
+        <summary lang="hr_HR">Dodatak za YouTube</summary>
+        <summary lang="hu_HU">YouTube kiegészítő</summary>
+        <summary lang="id_ID">Pengaya untuk YouTube</summary>
+        <summary lang="it_IT">Plugin per YouTube</summary>
+        <summary lang="ko_KR">유튜브 플러그인</summary>
+        <summary lang="nb_NO">Tillegg for YouTube</summary>
+        <summary lang="nl_NL">Plugin voor YouTube</summary>
+        <summary lang="pl_PL">Wtyczka YouTube</summary>
+        <summary lang="pt_BR">Plugin para YouTube</summary>
+        <summary lang="ro_RO">Modul pentru YouTube</summary>
+        <summary lang="ru_RU">Видеодополнение YouTube</summary>
+        <summary lang="sk_SK">Doplnok pre YouTube</summary>
+        <summary lang="sv_SE">Insticksmodul för YouTube</summary>
+        <summary lang="tr_TR">YouTube için eklenti</summary>
+        <summary lang="uk_UA">Додаток для YouTube</summary>
+        <summary lang="vi_VN">Plugin dành cho YouTube</summary>
+        <summary lang="zh_CN">油管插件</summary>
+        <summary lang="zh_TW">YouTube附加元件</summary>
+        <description lang="bg_BG">YouTube е един от най-големите уеб сайтове за споделяне на видео в целия свят.</description>
+        <description lang="bs_BA">YouTube je jedna od najvećih svjetskih web stranica za dijeljenje videozapisa.</description>
+        <description lang="cs_CZ">YouTube je jeden z největších webů pro sdílení videí na světě.</description>
+        <description lang="da_DK">YouTube er et af verdens største videodelingswebsteder.</description>
+        <description lang="de_DE">YouTube ist eines der größten Video-Sharing-Websites der Welt.</description>
+        <description lang="el_GR">Το YouTube είναι μία από τις μεγαλύτερες ιστοσελίδες διαμοιρασμού βίντεο στον κόσμο.</description>
+        <description lang="en_GB">YouTube is one of the biggest video-sharing websites of the world.</description>
+        <description lang="es_ES">YouTube es uno de los sitios web para compartir vídeos más grandes del mundo.</description>
+        <description lang="es_MX">YouTube es uno de los más grandes sitios web de intercambio de videos del mundo.</description>
+        <description lang="fi_FI">YouTube on yksi maailman suurimmista videoiden jakosivustoista.</description>
+        <description lang="fr_FR">YouTube est l&apos;un des plus grands sites de partage vidéos du monde.</description>
+        <description lang="he_IL">YouTube הוא אחד מאתרי שיתוף הווידאו הגדולים בעולם.</description>
+        <description lang="hr_HR">YouTube je jedna od najvećih stranica za dijeljenje video sadržaja na svijetu.</description>
+        <description lang="hu_HU">A YouTube világ egyik legnagyobb videómegosztó weboldala.</description>
+        <description lang="id_ID">YouTube adalah salah satu situs web berbagi video terbesar di dunia.</description>
+        <description lang="it_IT">YouTube è uno dei più grandi siti di condivisione video del mondo.</description>
+        <description lang="ko_KR">유튜브는 세상에서 가장 큰 동영상 공유 사이트 중의 하나입니다.</description>
+        <description lang="nb_NO">YouTube er en av verdens største nettsider for videodeling.</description>
+        <description lang="nl_NL">YouTube is een van de grootste videodelenwebsite in de hele wereld.</description>
+        <description lang="pl_PL">YouTube jest jednym z największych na świecie serwisów udostępniania wideo.</description>
+        <description lang="pt_BR">O YouTube é um dos maiores sites de compartilhamento de vídeos do mundo.</description>
+        <description lang="ro_RO">YouTube este unul dintre cele mai mari saituri de distribuire de videoclipuri din lume.</description>
+        <description lang="ru_RU">YouTube - популярнейший видеохостинговый сайт, предоставляющий пользователям услуги хранения, доставки и показа видео.</description>
+        <description lang="sk_SK">YouTube je jednou z najväčších stránok na zdieľanie videa na svete.</description>
+        <description lang="sv_SE">YouTube är en av världens största webbplatser för videodelning.</description>
+        <description lang="tr_TR">YouTube, dünya üzerindeki en büyük video paylaşma platformlarından birisidir.</description>
+        <description lang="uk_UA">YouTube є одним з найбільших відеохостингів в світі.</description>
+        <description lang="vi_VN">YouTube là một trong những trang web chia sẻ video lớn nhất trên thế giới.</description>
+        <description lang="zh_CN">油管是世界上最大的视频分享网站之一。</description>
+        <description lang="zh_TW">Youtube 是全世界最大的影片分享網站。</description>
+        <disclaimer lang="bs_BA">Ovaj dodatak nije odobren od strane Googlea</disclaimer>
+        <disclaimer lang="cs_CZ">Tento doplněk není oficiálně podporován společností Google</disclaimer>
+        <disclaimer lang="da_DK">Dette plugin er ikke godkendt af Google</disclaimer>
+        <disclaimer lang="de_DE">Dieses Plugin ist nicht von Google befürwortet</disclaimer>
+        <disclaimer lang="el_GR">Η παρούσα μικροεφαρμογή δεν έχει υϊοθετηθεί από την Google</disclaimer>
+        <disclaimer lang="en_GB">This plugin is not endorsed by Google</disclaimer>
+        <disclaimer lang="eo">Tiu aldonaĵo ne estas aprobita de Google</disclaimer>
+        <disclaimer lang="es_ES">Este add-on no está respaldado por Google</disclaimer>
+        <disclaimer lang="es_MX">Este complemento no está respaldado por Google</disclaimer>
+        <disclaimer lang="fi_FI">Google ei tue tätä lisäosaa</disclaimer>
+        <disclaimer lang="fr_FR">Ce module n&apos;est pas validé par Google</disclaimer>
+        <disclaimer lang="hr_HR">Ovaj dodatak nije podržan od strane Googlea</disclaimer>
+        <disclaimer lang="id_ID">Plugin ini tidak didukung oleh Google</disclaimer>
+        <disclaimer lang="it_IT">Questo plugin non è approvato da Google</disclaimer>
+        <disclaimer lang="ko_KR">이 플러그인은 Google의 허가를 받지 않았습니다</disclaimer>
+        <disclaimer lang="nl_NL">Deze plug-in wordt niet door Google ondersteund</disclaimer>
+        <disclaimer lang="pl_PL">Ta wtyczka nie jest zatwierdzona przez Google</disclaimer>
+        <disclaimer lang="pt_BR">Este plugin não é recomendado pelo Google</disclaimer>
+        <disclaimer lang="ro_RO">Acest modul nu este susținut de Google</disclaimer>
+        <disclaimer lang="ru_RU">Плагин не поддерживается Google</disclaimer>
+        <disclaimer lang="sk_SK">Tento doplnok nie je schválený spoločnosťou Google</disclaimer>
+        <disclaimer lang="sv_SE">Denna insticksmodul är inte godkänd av Google</disclaimer>
+        <disclaimer lang="tr_TR">Bu eklenti Google tarafından üretilmemiştir</disclaimer>
+        <disclaimer lang="uk_UA">Цей додаток не має відношення до компанії Google</disclaimer>
+        <disclaimer lang="vi_VN">Plugin này không được xác nhận bởi Google</disclaimer>
+        <disclaimer lang="zh_CN">此插件未被谷歌认可</disclaimer>
+        <disclaimer lang="zh_TW">此附加元件未由Google支持</disclaimer>
+    </extension>
+</addon>
+<addon id="plugin.video.mediathekview.tv"
+	name="MediathekView TV"
+	version="2.0.0"
+	provider-name="Feenichs, MediathekView.de, Leo Moll">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0"/>
+		<import addon="script.module.myconnpy" version="1.1.7"/>
+	</requires>
+	<extension
+		point="xbmc.python.pluginsource"
+		library="addon.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.python.script" library="script.py">
+		<provides>executable</provides>
+	</extension>
+	<extension point="kodi.context.item">
+	  <menu id="kodi.core.main">
+	    <item library="contextMenu.py" args="command_arg">
+	      <label>30005</label>
+	      <visible>Window.IsVisible(tvguide)|Window.IsVisible(tvsearch)</visible>
+	    </item>
+	  </menu>
+	</extension>
+	<extension
+		point="xbmc.service"
+		library="service.py"/>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="de_DE">Öffentlich-Rechtliche Mediatheken</summary>
+		<summary lang="en_GB">Public service video-platforms</summary>
+		<summary lang="it_IT">Piattaforme video dalle emittenti pubbliche</summary>
+		<description lang="de_DE">Ermöglicht den Zugriff auf fast alle deutschen Mediatheken der öffentlich Rechtlichen basierend auf der Datenbank von MediathekView.de</description>
+		<description lang="en_GB">Gives access to most video-platforms from German public service broadcasters using the database of MediathekView.de</description>
+		<description lang="it_IT">Fornisce l'accesso a gran parte delle piattaforme video operate dalle emittenti pubbliche tedesche usando la banca dati di MediathekView.de</description>
+		<news>
+v.2.0.0 (2026-11-27):
+- [new] Own add-on id plugin.video.mediathekview.tv and name "MediathekView TV", so it no longer replaces the original MediathekView add-on and both can be installed
+v.1.1.3~tv20 (2026-11-17):
+- [new] TV interface: "Last night on TV" on the home tab instead of the newest videos: the films of the national channels and the regional ones from 20:00 to 23:00, at least 40 minutes long, repeats and other versions left out; "show all" lists the last 7 evenings
+- [new] TV interface: tab "Categories" with movies, crime, documentaries, knowledge, children, satire and comedy, talk shows, concerts and music and sport of the last 30 days, guessed from the name of the show, the channel, the duration and words in the title and the description
+- [new] TV interface: the rows of movies, crime and documentaries of the home tab use these categories: movies are also recognized by the description ("Comedy, Germany 2019"), episodes of series and crime series are no longer listed as movies
+v.1.1.3~tv19 (2026-11-17):
+- [fix] TV interface: the search can be typed with a keyboard and the number keys of the remote again: the text above the keyboard of the window is a text field, it has the focus when the search tab opens, OK opens Kodi's keyboard; number keys on the keyboard of the window or on the results type into it, Back and BackSpace delete the last character
+v.1.1.3~tv18 (2026-11-17):
+- [new] TV interface: search while typing: the search tab has its own keyboard, the matching shows appear with every letter, the videos after a short pause from 3 characters on; without text it shows the recent and the saved searches, typos get suggestions of similar names
+v.1.1.3~tv17 (2026-11-17):
+- [new] TV interface: the search finds the words of the query in any order in the name of the show and the title ("lanz markus", "tatort münster"), ignores hyphens and the case and spelling of umlauts ("heute show", "terra-x", "ärzte", "boehmermann") and also searches the descriptions; it shows the matching shows in a row above the videos, episodes of matching shows first, and suggests similar names if no show was found ("sandmänchen")
+- [new] TV interface: "My shows": follow a show in the context menu or on the detail page, the shows of the films watched are followed automatically; the home tab shows "New episodes of my shows", the A–Z tab "My shows"
+- [new] TV interface: watchlist for films, in the context menu and on the detail page, with a row on the home tab
+v.1.1.3~tv16 (2026-10-28):
+- [fix] TV interface: the index of the websites for the preview images reads the film lists the database update downloads anyway instead of downloading the list of changes again every hour, only the full list once a week remains
+v.1.1.3~tv15 (2026-10-28):
+- [fix] TV interface: holding Back or backspace in the filter of a list of shows deleted the text and then left the list and the add-on, Back now only leaves after the key was released
+v.1.1.3~tv14 (2026-10-28):
+- [new] TV interface: the filter of the lists of shows finds the typed text anywhere in the name ("sand" finds "Unser Sandmännchen"), names starting with it first
+v.1.1.3~tv13 (2026-10-28):
+- [new] TV interface: filter above the lists of shows sorted by name (A-Z, all shows of a channel), shows the shows starting with the typed text; OK opens the keyboard, number keys and a keyboard type directly
+v.1.1.3~tv12 (2026-10-23):
+- [new] TV interface: scrollbar beside the grid, Right from the last column moves to it, Up/Down there move the grid by rows
+- [new] TV interface: grid pages show 100 tiles instead of 30, all rows are full
+v.1.1.3~tv10 (2026-10-22):
+- [fix] TV interface: names of the show tiles take up to three lines and sit at the bottom, "1 video" instead of "1 videos"
+v.1.1.3~tv9 (2026-10-22):
+- [fix] TV interface: titles of the tiles take up to three lines, longer ones end with an ellipsis
+v.1.1.3~tv8 (2026-10-22):
+- [fix] Download quality "high" fell back to the small video instead of the normal one
+v.1.1.3~tv7 (2026-10-22):
+- [fix] TV interface: films of collections like "Spielfilm" without an image of their own all showed the same image
+v.1.1.3~tv6 (2026-10-22):
+- [fix] TV interface: titles of the tiles were cut off at the bottom (e.g. "show all" of a channel)
+- [new] TV interface: yellow accent colour
+v.1.1.3~tv5 (2026-10-22):
+- [fix] TV interface: crash of Kodi while images were loaded (e.g. KiKA on Windows)
+v.1.1.3~tv4 (2026-10-22):
+- [new] TV interface: preview images from the websites of the media libraries
+v.1.1.3~tv3 (2026-10-22):
+- [fix] Windows: lists with films of unknown air date stayed empty (e.g. channel ARD, shows starting with S or R)
+- [new] TV interface: search and start letters within a channel
+v.1.1.3~tv2 (2026-10-22):
+- [fix] TV interface: "new" rows count from the date of the film list, the preview of the tab bar shows the first filled row
+v.1.1.3~tv1 (2026-10-22):
+- [new] TV interface in the style of the media library apps on Fire TV: tab bar, rows, preview, detail pages, continue watching
+- [fix] Videos without HD played in the small instead of the normal quality
+- [fix] Air times were one hour early during daylight saving time
+- [fix] Indexes for the database, SQL injection, crashes, NFO files and downloads
+v.1.1.3 (2024-06-02):
+- [fix] Query builder using time() instead of getLastUpdate which breaks cache usage
+- [fix] Rollback data type for aired / created to INT due to problems with mysql (#234)
+- [fix] Clear invalid aired / created epoch during upload
+v.1.1.2 (2024-05-17):
+- [fix] Sender icon ard-alpha/one
+v.1.1.1 (2024-05-09):
+- [fix] update to py3-virtualenv - thx@Clocken
+- [fix] aired date in 2200 causing overflow
+v.1.1.0 (2023-10-09):
+- [new] Update build via github actions
+- [new] Removed service startup (Kodi17)
+v.1.0.15 (2023-09-17):
+- [fix] disable client on updatemode disabled #229
+v.1.0.14 (2023-08-18):
+- [new] jump to MV from EPG context
+- [new] support VTT Subs
+- [fix] channel icon rbtv - radio bremen tv
+v.1.0.13 (2023-05-19):
+- [fix] extend url max size
+v.1.0.12 (2022-10-23):
+- [fix] #215 Wrong format of aired tag in NFO file
+v.1.0.11 (2022-08-30):
+- [other] add whitespace too all icons - thx@Ch1llb0
+- [other] fix some icons - thx@Ch1llb0
+v.1.0.10 (2022-08-28):
+- [other] channel icons turned monochrome mimicing the top corner icon during live TV broadcasting - thx@Ch1llb0
+- [other] streamline non-channel icon style - thx@Ch1llb0
+- [other] make all icons feature high resolution - thx@Ch1llb0
+- [other] minor fixes (renaming icons, adding missing ones) - thx@Ch1llb0
+v.1.0.9 (2022-05-03):
+- [new] #194 landscape fanart and changed content id to video
+- [new] #196 download all items in one folder via context menue
+- [fix] Letterbox selection for lower case letters sorting in incorrectly under #
+- [fix] Kodi settings for batchSize must be int (Kodi 17 issue)
+- [fix] #197 change connect settings and MySqlDB settings to utf8mb4
+- [other] Updater messages to be logged as debug (not info) #207 
+- [other] Removed sqlite custom functions (unixtimestamp / group concat)
+- [other] Update Dockerfile - Linuxserver.io changed the mariadb baseimage
+- [other] remove HD download option and add config setting for quality
+- [other] Add missing livestream icons (SWR RP / BW / Arte EN)
+- [other] internal update to file parsing
+v.1.0.0 (2021-03-14):
+- [fix] #125 fix for add to favorits
+- [new] #56 simple black list
+- [other] New UI icons and adjusted view (Wall view)
+- [other] New extended search to filter all criteria
+- [other] Database structure between mysql and sqlite aligned
+- [other] Navigation for all channels moved into channel view
+- [other] Settings split into general (UI settings) and advanced settings for UI behaviour
+- [other] Code restructring
+v.0.6.6 (2020-11-21)
+</news>
+		<platform>all</platform>
+		<language>de fr</language>
+		<license>MIT</license>
+		<forum>https://forum.kodi.tv/showthread.php?tid=326799</forum>
+		<source>https://github.com/Feenichs/plugin.video.mediathekview</source>
+		<website>https://mediathekview.de/</website>
+		<email>info@mediathekview.de</email>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+			<screenshot>resources/screenshot1.png</screenshot>
+			<screenshot>resources/screenshot2.png</screenshot>
+			<screenshot>resources/screenshot3.png</screenshot>
+			<screenshot>resources/screenshot4.png</screenshot>
+		</assets>
+	</extension>
+</addon>
+<addon id="plugin.video.amazon.tv"
+       name="Amazon VOD TV"
+       version="2.0.0"
+       provider-name="Feenichs, Sandmann79, Varstahl">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+    <import addon="script.module.beautifulsoup4" version="4.6.3+matrix.1"/>
+    <import addon="script.module.mechanicalsoup" version="0.12.0+matrix.1"/>
+    <import addon="script.module.pyxbmct" version="1.3.1+matrix.1"/>
+    <import addon="script.module.inputstreamhelper" version="0.4.4+matrix.1"/>
+    <import addon="script.module.requests" version="2.22.0+matrix.1"/>
+    <import addon="script.module.pyautogui" version="0.9.49+matrix.1"/>
+    <import addon="script.module.amazoncaptcha" version="0.5.11+matrix.1"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource"
+             library="default.py">
+	<provides>video</provides>
+  </extension>
+  <extension point="xbmc.python.script" library="script.py">
+	<provides>executable</provides>
+  </extension>
+  <extension point="xbmc.service" library="service.py" start="startup" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <reuselanguageinvoker>true</reuselanguageinvoker>
+    <summary lang="en_GB">Amazon Prime Video Streaming</summary>
+    <summary lang="de_DE">Amazon Prime Instant Video</summary>
+    <summary lang="es_ES">Vídeo a demanda de Amazon Prime</summary>
+    <summary lang="ua_UA">Потокове відео Amazon Prime</summary>
+    <description lang="en_GB">Movies and Television Shows for Prime Members</description>
+    <description lang="de_DE">Filme und Serien für Amazon Prime Mitglieder</description>
+    <description lang="es_ES">Películas y Series para Miembros de Amazon Prime</description>
+    <description lang="ua_UA">Фільми та серіали для підписників Prime</description>
+    <disclaimer lang="en_GB">Some parts of this addon may not be legal in your country of residence - please check with your local laws before installing.</disclaimer>
+    <disclaimer lang="de_DE">Möglicherweise sind einge Teile dieses Addons in Ihrem Land illegal, Sie sollten dies unbedingt vor der Installation überprüfen.</disclaimer>
+    <disclaimer lang="es_ES">Algunas partes de este addon pueden que sean illegales en tu país de residencia - por favor, compruébalo antes de la instalación.</disclaimer>
+    <disclaimer lang="ua_UA">Деякі частини цього плагіну можуть бути незаконні в країні вашого проживання - будь ласка, перевірте це перед встановленням.</disclaimer>
+    <forum>http://www.kodinerds.net/index.php/Thread/44211-Release-Amazon-Prime-Instant-Video</forum>
+    <source>https://github.com/Feenichs/plugin.video.amazon-test</source>
+    <news>2.0.0: Own add-on id plugin.video.amazon.tv and name "Amazon VOD TV", so it no longer replaces the original Amazon VOD add-on (plugin.video.amazon-test) and both can be installed. The list of profiles works again (fix by Sandmann79: Amazon moved the profiles within the page).</news>
+    <license>GPL-3.0-or-later</license>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.png</fanart>
+      <clearlogo>clearlogo.png</clearlogo>
+    </assets>
+  </extension>
+</addon>
+<addon id="script.module.amazoncaptcha"
+       name="amazoncaptcha"
+       version="0.5.11+matrix.1"
+       provider-name="Anatolii Maliarov">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+    <import addon="script.module.pil" version="1.1.7"/>
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Pillow-based solver for Amazon's text captcha</summary>
+    <description lang="en_GB">Pillow-based solver for Amazon's text captcha</description>
+    <license>MIT License</license>
+    <platform>all</platform>
+    <website>https://github.com/a-maliarov/amazoncaptcha</website>
+    <source>https://github.com/a-maliarov/amazoncaptcha</source>
+  </extension>
+</addon>
+<addon id="script.module.mechanicalsoup"
+	name="MechanicalSoup"
+	version="1.0.0+matrix.1"
+	provider-name="Matthew Hickford, Dan Hemberger, Matthieu Moy">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0"/>
+		<import addon="script.module.requests" version="2.22.0+matrix.1"/>
+		<import addon="script.module.beautifulsoup4" version="4.6.3+matrix.1"/>
+		<import addon="script.module.six" version="1.14.0+matrix.1"/>
+	</requires>
+	<extension point="xbmc.python.module" library="lib" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">A Python library for automating interaction with websites.</summary>
+		<forum></forum>
+		<website>https://mechanicalsoup.readthedocs.io/</website>
+		<license>MIT</license>
+		<platform>all</platform>
+		<source>https://github.com/MechanicalSoup/MechanicalSoup</source>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+	</extension>
+</addon>
+<addon id="script.module.pyautogui"
+	name="PyAutoGUI"
+	version="0.9.51+matrix.1"
+	provider-name="Al Sweigart">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0"/>
+	</requires>
+	<extension point="xbmc.python.module" library="lib" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">PyAutoGUI is a cross-platform GUI automation Python module for human beings. Used to programmatically control the mouse and keyboard.</summary>
+		<forum></forum>
+		<website>https://pyautogui.readthedocs.io/</website>
+		<license>see LICENSE.txt</license>
+		<platform>all</platform>
+		<source>https://github.com/asweigart/pyautogui</source>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+	</extension>
+</addon>
+</addons>
