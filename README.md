@@ -19,7 +19,9 @@ offiziellen Kodi-Repository sind.
 2. *Einstellungen → Dateimanager → Quelle hinzufügen* → `https://feenichs.github.io/kodi-repository/` eingeben,
    Name z. B. „Feenichs“.
 3. *Add-ons → Aus ZIP-Datei installieren* → „Feenichs“ → `repository.feenichs-….zip`.
-4. *Add-ons → Aus Repository installieren* → *Feenichs Add-ons* → gewünschtes Add-on installieren.
+4. *Add-ons → Aus Repository installieren* → *Feenichs Add-ons* → gewünschtes Add-on installieren: Spotify TV steht
+   unter *Musik-Add-ons*, die anderen unter *Video-Add-ons*. Erscheint gleich nach der Installation des Repositorys
+   „Keine Verbindung zum Repository“, Kodi einmal neu starten.
 
 Die ZIP des Repositorys gibt es auch direkt unter
 [feenichs.github.io/kodi-repository](https://feenichs.github.io/kodi-repository/).
@@ -33,7 +35,8 @@ Add-ons.
 Kodi repository for my add-ons, so that Kodi installs updates automatically. Install: enable *Unknown sources*, add
 the source `https://feenichs.github.io/kodi-repository/` in the file manager, install
 `repository.feenichs-….zip` from it via *Add-ons → Install from zip file*, then install the add-ons via
-*Install from repository → Feenichs Add-ons*.
+*Install from repository → Feenichs Add-ons* (Spotify TV is under *Music add-ons*, the others under *Video add-ons*;
+if Kodi says it could not connect to the repository right after installing it, restart Kodi once).
 
 ## Building
 
