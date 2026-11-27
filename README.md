@@ -39,4 +39,4 @@ the source `https://feenichs.github.io/kodi-repository/` in the file manager, in
 
 `python3 build.py` builds `dist/` from the release tags listed in `ADDONS` in `build.py` (the forks are expected
 next to this folder) and the module zips of Sandmann79's repository. `python3 build.py --worktree` builds the
-working trees instead, for testing. `dist/` is published as the branch `gh-pages`.
+working trees instead, for testing. `dist/` is published with `./publish.sh` as the branch `gh-pages` (one commit, no history).
