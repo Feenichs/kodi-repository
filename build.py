@@ -43,7 +43,7 @@ ADDONS = [
     {
         "id": "plugin.video.youtube.tv",
         "git": os.path.join(PROJECTS, "youtube_kodi"),
-        "ref": "v7.4.4.12",
+        "ref": "v7.4.4.13",
         "include": ["addon.xml", "changelog.txt", "LICENSES", "README.md", "resources"],
     },
     {
